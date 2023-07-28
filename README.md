@@ -1,70 +1,113 @@
-# Getting Started with Create React App
+# PROYECTO REACT PARA PRODUCCION
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- React con librerias que permite proyecto SEO 
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+```
+=============
+package.json
+=============
+{
+  "name": "react-prod",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+     ***
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
+    "react-router-dom": "^6.14.2",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+     ***
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "postbuild": "react-snap",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "reactSnap": {
+    "source": "build",
+    "minifyHtml": {
+      "collapseWhitespace": false,
+      "removeComments": false
+    }
+  },
+  ***
+  "devDependencies": {
+    "react-snap": "^1.23.0"
+  }
+}
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+======= 
+App.jsx
+=======
+import React, { Suspense, lazy } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+import Navbar from "./components/Navbar";
+import "./App.css";
 
-### `npm test`
+// import Home from "./pages/Home";
+// import About from "./pages/About";
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+const App = () => {
+  return (
+    <div className="main">
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route
+            element={
+              <Suspense fallback={<h3>Cargando...</h3>}>
+                <Home />
+              </Suspense>
+            }
+            path="/"
+          />
+          <Route
+            element={
+              <Suspense fallback={<h3>Cargando...</h3>}>
+                <About />
+              </Suspense>
+            }
+            path="about"
+          />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
+};
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+export default App;
+```
 
 ### Deployment
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+### `Subir a netlify`
+![netf-1Captura](https://github.com/wlopera/react-prod/assets/7141537/8696782d-d41b-4539-bd5e-60a4d5f865b1)
+![netf-2Captura](https://github.com/wlopera/react-prod/assets/7141537/462576e9-3436-4a1d-9992-ab850b3b3fcb)
+![netf-3Captura](https://github.com/wlopera/react-prod/assets/7141537/d04800af-47a7-4ae0-b643-ed5e3693689f)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### `Salida`
+![sal1Captura](https://github.com/wlopera/react-prod/assets/7141537/e2aeb115-7a70-432f-9daa-f5f8adb80c0b)
+![sal2Captura](https://github.com/wlopera/react-prod/assets/7141537/5163cc15-b64f-498f-8e6d-550c7b66b6a8)
+
+
+### `Vista de lazy - suspense` Colocar navegador lento
+![lento1-Captura](https://github.com/wlopera/react-prod/assets/7141537/af16ff8d-e4fa-4c5d-b1e6-5ad0f99af8a4)
+![lent4Captura](https://github.com/wlopera/react-prod/assets/7141537/006889af-9439-4937-9310-ad1ad011a7c6)
+
+#### Demo
+https://idyllic-gnome-22e5ae.netlify.app/
