@@ -1,10 +1,15 @@
 # PROYECTO REACT PARA PRODUCCION
 
-- React con librerias que permite proyecto SEO 
+- React con librerias que ayuda al desarrollo de proyecto SEO 
+  - helmet
+  - react-snap
 
-## Available Scripts
+## CRear proyecto react
+* npx create-react-app react-prod
+* cd react-app
+* npm run start
 
-In the project directory, you can run:
+## Desarrollo
 
 ```
 =============
